@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Wishlist</h1>
+        <a href="{{ url_for('add_book') }}" class="btn btn-primary mt-3">Добавить книгу</a>
+        <a href="{{ url_for('profile') }}" class="btn btn-secondary mt-3">Профиль</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-danger mt-3">Выйти</a>
+
+        <h2 class="mt-5">Хочу прочитать</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Автор</th>
+                    <th>Жанр</th>
+                    <th>Статус</th>
+                    <th>Рейтинг</th>
+                    <th>Изменить</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in want_to_read_books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.genre }}</td>
+                    <td>{{ book.status }}</td>
+                    <td>{{ book.rating }}</td>
+                    <td><a href="{{ url_for('edit_book', book_id=book.id) }}" class="btn btn-warning">Изменить</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2 class="mt-5">В процессе</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Автор</th>
+                    <th>Жанр</th>
+                    <th>Статус</th>
+                    <th>Рейтинг</th>
+                    <th>Изменить</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in in_progress_books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.genre }}</td>
+                    <td>{{ book.status }}</td>
+                    <td>{{ book.rating }}</td>
+                    <td><a href="{{ url_for('edit_book', book_id=book.id) }}" class="btn btn-warning">Изменить</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2 class="mt-5">Прочитано</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Название</th>
+                    <th>Автор</th>
+                    <th>Жанр</th>
+                    <th>Статус</th>
+                    <th>Рейтинг</th>
+                    <th>Изменить</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in read_books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.genre }}</td>
+                    <td>{{ book.status }}</td>
+                    <td>{{ book.rating }}</td>
+                    <td><a href="{{ url_for('edit_book', book_id=book.id) }}" class="btn btn-warning">Изменить</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

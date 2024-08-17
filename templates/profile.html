@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Профиль</h1>
+        <h2>Статистика</h2>
+        <p>Прочитано книг в этом году: {{ read_books }}</p>
+        <p>Книг в списке желаний: {{ want_to_read_books }}</p>
+
+        <h2>Цель</h2>
+        <form method="POST" action="{{ url_for('set_goal') }}">
+            <div class="form-group">
+                <label for="goal">Установите свою цель по чтению на год:</label>
+                <input type="number" class="form-control" id="goal" name="goal" value="{{ reading_goal }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Установить цель</button>
+        </form>
+
+        <h2 class="mt-5">Прогресс</h2>
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: {{ (read_books / reading_goal) * 100 if reading_goal > 0 else 0 }}%;" aria-valuenow="{{ read_books }}" aria-valuemin="0" aria-valuemax="{{ reading_goal }}">
+                {{ read_books }} / {{ reading_goal }}
+            </div>
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary mt-3">Назад</a>
+    </div>
+</body>
+</html>
